@@ -7,7 +7,7 @@ This repo holds my Project Two work: a pirate “intelligent agent” that learn
 - `TreasureMaze.py` - the maze environment used by the agent
 - `Project Two.docx` - my design defense / reflection
 
-## How it works (one paragraph, no fluff)
+## How it works
 
 I use a **Deep Q-Network** that takes the flattened maze and outputs four Q-values (left/up/right/down). Training samples come from a replay buffer so updates are not highly correlated. A **target network** (a delayed copy of the online network) stabilizes the bootstrapped target. Actions are chosen with **ε-greedy** (start higher ε to explore; decay slowly so the agent does not lock in too early). Because rewards are sparse and some starts are far from the goal, I increased per-episode step limits and used a higher discount (γ=0.99) so successful paths influence earlier decisions.
 
