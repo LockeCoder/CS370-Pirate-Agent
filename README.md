@@ -1,8 +1,8 @@
 # CS-370 Pirate Intelligent Agent
 
-CS-370 Project Two repository for a pirate intelligent agent that learns to navigate a maze and reach the treasure using Deep Q-Learning.
+This repository contains my CS-370 Project Two work: a pirate intelligent agent that learns to navigate a maze and reach the treasure using Deep Q-Learning.
 
-This project demonstrates reinforcement learning concepts, including state representation, action selection, reward-based learning, experience replay, target network stabilization, and model evaluation in a grid-based environment.
+The project demonstrates reinforcement learning concepts, including state representation, action selection, reward-based learning, experience replay, target-network stabilization, hyperparameter tuning, and model evaluation in a grid-based environment.
 
 ## Project Overview
 
@@ -12,12 +12,12 @@ The agent uses reinforcement learning rather than hard-coded pathfinding. It imp
 
 ## Repository Contents
 
-- `TreasureHuntGame.ipynb`: Main notebook containing training logic, tests, and results
-- `TreasureHuntGame.html`: Exported HTML version of the notebook for quick viewing
-- `TreasureMaze.py`: Maze environment used by the pirate agent
-- `Project Two.docx`: Design defense and reflection document
-- `README.md`: Repository documentation
-- `.gitignore`: Git ignore configuration
+- `TreasureHuntGame.ipynb` — main notebook containing training logic, tests, and results
+- `TreasureHuntGame.html` — exported HTML version of the notebook for quick viewing
+- `TreasureMaze.py` — maze environment used by the pirate agent
+- `Project Two.docx` — design defense and reflection document
+- `README.md` — repository documentation
+- `.gitignore` — Git ignore configuration
 
 ## How It Works
 
@@ -30,7 +30,9 @@ The project uses a Deep Q-Network that takes the flattened maze state as input a
 
 Training samples are stored in a replay buffer so updates are not overly dependent on the most recent sequence of actions. A target network, which is a delayed copy of the online network, helps stabilize bootstrapped Q-value targets during training.
 
-Actions are selected using an epsilon-greedy strategy. Early in training, the agent explores more often. Over time, epsilon decays so the agent increasingly selects actions based on learned Q-values. Because rewards are sparse and some starting locations are far from the goal, the training configuration uses a higher discount factor and increased per-episode step limits so successful paths can influence earlier decisions.
+Actions are selected using an epsilon-greedy strategy. Early in training, the agent explores more often. Over time, epsilon decays so the agent increasingly selects actions based on learned Q-values.
+
+Because rewards are sparse and some starting locations are far from the goal, the training configuration uses a higher discount factor and increased per-episode step limits so successful paths can influence earlier decisions.
 
 ## Key Training Parameters
 
@@ -56,8 +58,7 @@ In the notebook training cell, use:
 
 ```python
 elapsed = qtrain(
-    model,
-    maze,
+    model, maze,
     epochs=999999,
     max_memory=12 * maze.size,
     data_size=96,
@@ -79,7 +80,7 @@ elapsed = qtrain(
 - Deep Q-Learning
 - Neural network-based decision making
 - Experience replay
-- Target network stabilization
+- Target-network stabilization
 - Epsilon-greedy exploration
 - Hyperparameter tuning
 - Model evaluation
@@ -112,9 +113,8 @@ I documented the project limits honestly. Sparse rewards and long maze paths mak
 
 ## Future Improvements
 
-- Add clearer screenshots or charts showing training progress
-- Add a short explanation of the reward structure
 - Add a `requirements.txt` file for easier setup
+- Add a short explanation of the reward structure
 - Add more comparison runs with different epsilon schedules and discount factors
 - Improve reporting for success rate across all valid starting cells
 - Organize supporting files into `notebooks/`, `src/`, and `docs/` folders
