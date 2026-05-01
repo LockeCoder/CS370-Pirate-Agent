@@ -46,9 +46,9 @@ Actions are selected using an epsilon-greedy strategy. Early in training, the ag
 
 ## Results Snapshot
 
-- Single-start test from top-left: documented in `TreasureHuntGame.ipynb`
-- Completion check across free starting cells: documented in `TreasureHuntGame.ipynb`
-- Final run used a wall-clock cap of approximately 25 minutes to meet project constraints
+The final training and validation results are documented in `TreasureHuntGame.ipynb` and the exported `TreasureHuntGame.html` file.
+
+The final run used a wall-clock cap of approximately 25 minutes to meet the project deadline. Under that constraint, the training configuration prioritized the canonical top-left starting position used for grading, then expanded validation across additional free starting cells when possible.
 
 ## Reproduce the Final Run
 
