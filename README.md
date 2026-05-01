@@ -1,38 +1,49 @@
 # CS-370 Pirate Intelligent Agent
 
-This repository contains my CS-370 Project Two work: a pirate intelligent agent that learns to navigate a maze and reach the treasure using Deep Q-Learning.
-
-The project demonstrates reinforcement learning concepts, including state representation, action selection, reward-based learning, experience replay, target-network stabilization, hyperparameter tuning, and model evaluation in a grid-based environment.
+A Python reinforcement learning project that trains a pirate agent to navigate a maze and reach the treasure using Deep Q-Learning.
 
 ## Project Overview
 
-The goal of this project was to train an intelligent agent to solve a maze navigation problem. The pirate agent learns how to move through the maze and reach the treasure by using a Deep Q-Network to estimate the value of possible actions from each game state.
+This project was created for CS-370 to demonstrate reinforcement learning, neural network-based decision making, and intelligent agent development.
 
-The agent uses reinforcement learning rather than hard-coded pathfinding. It improves through repeated training episodes, reward feedback, replay memory, and gradual exploration/exploitation tuning.
+The goal of the project was to train an agent to solve a maze navigation problem. Instead of using hard-coded pathfinding logic, the pirate agent learns from repeated attempts, reward feedback, experience replay, and exploration/exploitation tuning.
+
+The agent uses a Deep Q-Network to estimate the value of possible actions from each maze state. Over time, the model learns which actions are more likely to move the agent toward the treasure.
 
 ## Repository Contents
 
-- `TreasureHuntGame.ipynb` — main notebook containing training logic, tests, and results
-- `TreasureHuntGame.html` — exported HTML version of the notebook for quick viewing
-- `TreasureMaze.py` — maze environment used by the pirate agent
-- `Project Two.docx` — design defense and reflection document
-- `README.md` — repository documentation
-- `.gitignore` — Git ignore configuration
+- `TreasureHuntGame.ipynb` - Main notebook containing training logic, tests, and results
+- `TreasureHuntGame.html` - Exported HTML version of the notebook for quick viewing
+- `TreasureMaze.py` - Maze environment used by the pirate agent
+- `Project Two.docx` - Design defense and reflection document
+- `.gitignore` - Git ignore configuration
+- `README.md` - Repository documentation
+
+## Features
+
+- Trains an intelligent agent using Deep Q-Learning
+- Uses a neural network to estimate action values
+- Applies an epsilon-greedy strategy for exploration and exploitation
+- Stores training samples in replay memory
+- Uses target-network stabilization to improve training consistency
+- Evaluates agent behavior in a grid-based maze environment
+- Documents final training configuration and project limitations
+- Includes both notebook and exported HTML formats for review
 
 ## How It Works
 
-The project uses a Deep Q-Network that takes the flattened maze state as input and outputs Q-values for four possible actions:
+The maze environment represents the agent's current state, available moves, rewards, and game status. The pirate agent can choose from four possible movement actions:
 
 - Left
 - Up
 - Right
 - Down
 
-Training samples are stored in a replay buffer so updates are not overly dependent on the most recent sequence of actions. A target network, which is a delayed copy of the online network, helps stabilize bootstrapped Q-value targets during training.
+The Deep Q-Network receives the maze state as input and outputs Q-values for each possible action. A higher Q-value indicates that the action is expected to produce a better long-term reward.
 
-Actions are selected using an epsilon-greedy strategy. Early in training, the agent explores more often. Over time, epsilon decays so the agent increasingly selects actions based on learned Q-values.
+During training, the agent uses an epsilon-greedy policy. Early in training, the agent explores more often by choosing random actions. As training continues, epsilon decreases, and the agent increasingly chooses actions based on learned Q-values.
 
-Because rewards are sparse and some starting locations are far from the goal, the training configuration uses a higher discount factor and increased per-episode step limits so successful paths can influence earlier decisions.
+Replay memory stores previous experiences so the model can train from a broader sample of past states, actions, rewards, and next states instead of only learning from the most recent move. A target network is also used to stabilize Q-value updates during training.
 
 ## Key Training Parameters
 
@@ -73,6 +84,16 @@ elapsed = qtrain(
 )
 ```
 
+## Technologies Used
+
+- Python
+- Jupyter Notebook
+- Deep Q-Learning
+- Neural networks
+- NumPy
+- Keras / TensorFlow
+- Reinforcement learning environment logic
+
 ## Skills Demonstrated
 
 - Python programming
@@ -84,37 +105,60 @@ elapsed = qtrain(
 - Epsilon-greedy exploration
 - Hyperparameter tuning
 - Model evaluation
-- Jupyter Notebook workflows
+- Runtime-aware experimentation
+- Jupyter Notebook workflow
 - Technical reflection and documentation
 
-## Technologies Used
+## Technical Reflection
 
-- Python
-- Jupyter Notebook
-- Deep Q-Learning
-- Neural networks
-- NumPy
-- Keras / TensorFlow
-- Reinforcement learning environment logic
+### Starter Code and My Contributions
 
-## Reflection
+The project included provided environment and experience buffer code. I kept the existing maze environment structure and expanded the training logic needed to train and evaluate the intelligent agent.
 
-### My Work vs. Starter Code
+My work focused on implementing and tuning the Deep Q-Learning process, including the training loop, action-selection strategy, replay memory usage, target-network synchronization, hyperparameter tuning, and runtime-limited validation.
 
-I kept the provided environment and experience buffer structure, then added and adjusted the training loop logic needed to train the agent. I added the target network, handled both `running` and `not_over` game status values, and tuned the epsilon schedule, discount factor, replay settings, target synchronization interval, and episode step limits.
+### Reinforcement Learning Approach
+
+The agent learns through trial and error. Each action produces feedback through the environment's reward system, and the model uses that feedback to improve future action choices.
+
+The main challenge was balancing exploration and exploitation. If the agent explores too much, it may fail to consistently reach the treasure. If it exploits too early, it may converge on weak behavior before learning better paths. Tuning epsilon, epsilon decay, discount factor, replay memory, and episode length helped improve training behavior.
+
+### Challenges and Problem Solving
+
+Sparse rewards and longer maze paths made training difficult under a limited runtime. Some starting locations are farther from the treasure and require longer successful paths before the model can receive useful reward feedback.
+
+To address this, I adjusted the discount factor, step limits, target-network synchronization, and replay memory settings. I also prioritized the canonical top-left starting position used for grading while expanding validation across additional free starting cells when possible.
 
 ### Connection to Computer Science
 
-This project represents the full computer science problem-solving process: define the objective, model the environment, choose an algorithm, evaluate results, and iterate. The model is not magic. It improves because the problem is represented clearly, feedback is measured consistently, and the algorithm is adjusted based on observed behavior.
+This project demonstrates how computer science applies algorithmic thinking to intelligent decision-making problems. The agent does not simply follow a fixed set of instructions. Instead, the system represents a problem space, evaluates possible actions, learns from feedback, and improves through repeated training.
+
+This connects to broader software engineering concepts such as modeling, optimization, testing, maintainability, and ethical documentation of system limitations.
 
 ### Ethics and Limitations
 
-I documented the project limits honestly. Sparse rewards and long maze paths make full coverage expensive, especially under runtime constraints. Under the project deadline, I prioritized the canonical starting position used for grading and then expanded validation when possible. The notebook includes the training configuration needed to reproduce the final run.
+I documented the project limits honestly. The model's behavior depends on training time, reward structure, hyperparameter choices, and the difficulty of the starting position.
+
+Because the final run used a project deadline time cap, the results should be interpreted within that runtime constraint. The notebook and HTML export provide the detailed training configuration and final recorded results.
+
+## Project Value
+
+This project shows the ability to work with machine learning concepts, reinforcement learning logic, neural network-based decision making, and experimental tuning.
+
+It is strongest for demonstrating Python development, AI/ML fundamentals, problem solving, model evaluation, and the ability to explain technical limitations clearly.
 
 ## Future Improvements
 
 - Add a `requirements.txt` file for easier setup
+- Add clearer setup instructions for TensorFlow/Keras dependencies
 - Add a short explanation of the reward structure
 - Add more comparison runs with different epsilon schedules and discount factors
 - Improve reporting for success rate across all valid starting cells
+- Add charts showing training progress over time
 - Organize supporting files into `notebooks/`, `src/`, and `docs/` folders
+
+## Academic Portfolio Notice
+
+This repository is shared as an academic portfolio artifact. It may include coursework documentation and assignment-specific material created for an educational setting.
+
+Please do not reuse, submit, or redistribute this work as your own.
